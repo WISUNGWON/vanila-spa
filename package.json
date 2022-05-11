@@ -1,0 +1,7 @@
+{
+  "name": "vanila-spa",
+  "main": "index.js",
+  "dependencies": {
+    "serve": "^13.0.2"
+  }
+}
