@@ -18,6 +18,7 @@ function ProductDetail({ $target, initialState }) {
       });
     }
   };
+
   this.render = () => {
     const { product } = this.state;
     $productDetail.innerHTML = `
@@ -29,19 +30,20 @@ function ProductDetail({ $target, initialState }) {
                 <option>선택하세요.</option>
                 ${product.productOptions
                   .map(
-                    (option) => `
+                    (option) =>
+                      `
                     <option value="${option.id} ${
-                      option.stock === 0 ? "disabled" : ""
-                    }>
+                        option.stock === 0 ? "disabled" : ""
+                      }">
                         ${option.stock === 0 ? "(품절) " : ""}${product.name} ${
-                      option.name
-                    } ${option.price > 0 ? `(+${option.price}원)` : ""}
+                        option.name
+                      } ${option.price > 0 ? `(+${option.price}원)` : ""}
                     </option>
                 `
                   )
                   .join("")}
             </select>
-            <div class="ProductDetail__selectedOptions"></div>
+            <div class="ProductDetail__selectedOptions"/>
         </div>
     `;
 

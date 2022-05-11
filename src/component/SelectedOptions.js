@@ -45,7 +45,6 @@ function SelectedOptions({ $target, initialState }) {
     }
 
     const $input = document.getElementsByTagName("input");
-    console.log($input[0]);
     if ($input[0]) {
       const $selectInput = $input[0];
       $selectInput.addEventListener("change", (e) => {
@@ -56,7 +55,6 @@ function SelectedOptions({ $target, initialState }) {
           if (typeof nextQuantity == "number") {
             const { product } = this.state;
             const optionId = parseInt(e.target.dataset.optionid);
-            console.log({ optionId });
             const option = product.productOptions.find(
               (option) => option.id === optionId
             );
