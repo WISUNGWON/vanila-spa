@@ -1,6 +1,5 @@
 function SelectedOptions({ $target, initialState }) {
   const $component = document.createElement("div");
-  console.log($target);
   $target.appendChild($component);
   this.state = initialState;
   this.setState = (nextState) => {
@@ -32,7 +31,7 @@ function SelectedOptions({ $target, initialState }) {
                         ${selectedOption.optionName} ${
                       product.price + selectedOption.optionPrice
                     }원
-                        <input type="text" data-optionId="${
+                        <input type="text" data-optionid="${
                           selectedOption.optionId
                         }" value="${selectedOption.quantity}">
                     </li>
@@ -43,6 +42,39 @@ function SelectedOptions({ $target, initialState }) {
             <div class="ProductDetail__totalPrice">${this.getTotalPrice()}원</div>
             <button class="OrderButton">주문하기</button>
         `;
+    }
+
+    const $input = document.getElementsByTagName("input");
+    console.log($input[0]);
+    if ($input[0]) {
+      const $selectInput = $input[0];
+      $selectInput.addEventListener("change", (e) => {
+        try {
+          const nextQuantity = parseInt(e.target.value);
+          const nextSelectedOptions = [...this.state.selectedOptions];
+
+          if (typeof nextQuantity == "number") {
+            const { product } = this.state;
+            const optionId = parseInt(e.target.dataset.optionid);
+            console.log({ optionId });
+            const option = product.productOptions.find(
+              (option) => option.id === optionId
+            );
+            const selectedOptionIndex = nextSelectedOptions.findIndex(
+              (selectedOption) => selectedOption.optionId === optionId
+            );
+            nextSelectedOptions[selectedOptionIndex].quantity =
+              option.stock >= nextQuantity ? nextQuantity : option.stock;
+
+            this.setState({
+              ...this.state,
+              selectedOptions: nextSelectedOptions,
+            });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      });
     }
   };
   this.render();

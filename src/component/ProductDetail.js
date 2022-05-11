@@ -45,10 +45,6 @@ function ProductDetail({ $target, initialState }) {
         </div>
     `;
 
-    console.log($productDetail);
-    console.log(
-      $productDetail.querySelector(".ProductDetail__selectedOptions")
-    );
     selectedOptions = new SelectedOptions({
       $target: $productDetail.querySelector(".ProductDetail__selectedOptions"),
       initialState: {
